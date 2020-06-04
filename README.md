@@ -27,7 +27,7 @@
 | 노드역할   | IP             | HOST_NAME            | DISK        |
 | ---------- | -------------- | -------------------- | ----------- |
 | CDH        | 10.200.101.122 | cdh02.goodmit.co.kr  |             |
-| CDSW       | 10.11.2.192    | cdsw02.goodmit.co.kr | block space |
+| CDSW       | 10.11.2.191    | cdsw02.goodmit.co.kr | block space |
 | Repository | 10.200.101.253 | repo.goodmit.co.kr   |             |
 | DNS Server | 10.200.101.121 | cdh02.goodmit.co.kr  |             |
 
