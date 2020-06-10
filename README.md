@@ -27,7 +27,7 @@
 | 노드역할   | IP             | HOST_NAME            | DISK        |
 | ---------- | -------------- | -------------------- | ----------- |
 | CDH        | 10.200.101.122 | cdh02.goodmit.co.kr  |             |
-| CDSW       | 10.11.2.191    | cdsw02.goodmit.co.kr | block space |
+| CDSW       | 10.11.2.192    | cdsw02.goodmit.co.kr | block space |
 | Repository | 10.200.101.253 | repo.goodmit.co.kr   |             |
 | DNS Server | 10.200.101.121 | cdh02.goodmit.co.kr  |             |
 
@@ -447,6 +447,11 @@ sda               8:0    0 931.5G  0 disk
 
 ### Add Host
 
+- Hosts > Add Hosts > Add hosts to cluster
+- 현재 cluster를 선택  > Next
+- install CDH parcels.
+- instance > Add Role 
+
 
 
 ### cm에서 cdsw 서비스 추가
@@ -578,6 +583,7 @@ Wed May 20 01:25:14 2020
   - CDSW Web UI 로그인 > Dashboard에서 GPU 그래프 활성화 확인
 
     ![스크린샷 2020-05-19 오후 5.07.11](/Users/roger/Desktop/스크린샷 2020-05-19 오후 5.07.11.png)
+
 
 
 ## Custom Docker Image 
@@ -873,9 +879,29 @@ docker load --input cuda10.docker.repository.cloudera.com.tar.gz
 
 
 
+## Worker Host 추가 
+
+- Add Host
+
+- Host Templet에서 > HDFS Gateway , Yarn Gateway, Spark2 gateway 선택
+
+- Cloudera Data Science Workbench > Instances Tab > Add Role Instances > **Worker** and **Docker Daemon** 선택
+
+  - 만약 실행 되지 않을 경우 Role 화면에서 현재 추가 하는 host 체크 후 "Prepare Node"를 실행 해 준다.
+
+    (***Do not start the new roles at this point. You must run the Prepare Node command as described in the next steps before the roles are started.\***)
+
+- Instances > 신규 추가 Role 체크 > Actions for Selected > Start 
+
+
+
 ## Trouble shooting
 
 ### conntrack-tools.x86_64 lib install ERROR 로 설치 진행 안될 경우
+
+```bash
+ERROR:: Packages [conntrack-tools.x86_64] are not installed. Please install them and retry.: 1
+```
 
 - 1.7.2에서 발생하며, OS 배포 버전 rpm package에는 포함되지 않아 별도로 다운 받아서 설치 해 줘야함.
 
@@ -953,4 +979,6 @@ vgdisplay
 lvremove /dev/VG이름/LV이름
 vgremove /dev/VG이름
 pvremove /dev/sdb1 /dev/sdb2 /dev/sdc1
+
 ```
+
